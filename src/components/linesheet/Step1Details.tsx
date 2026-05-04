@@ -177,7 +177,8 @@ function DropFile() {
     <div className="relative flex flex-1 w-full items-center justify-center overflow-hidden rounded-md border border-elements-border bg-muted">
       <div className="relative h-[120px] w-[334px] overflow-hidden rounded-xs">
         <img
-          src="/figma/banner.jpg"
+          // BASE_URL prefix → resolves under GitHub Pages base path.
+          src={`${import.meta.env.BASE_URL}figma/banner.jpg`}
           alt="Linesheet banner"
           className="h-full w-full object-cover"
         />

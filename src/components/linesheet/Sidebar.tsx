@@ -11,9 +11,11 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-// SVGs live in public/ so they're served directly from the site root.
-const logoSign = '/figma/logo-sign.svg'
-const logoWordmark = '/figma/logo-wordmark.svg'
+// SVGs live in public/ so they're served from the site root.
+// Use BASE_URL so the path resolves correctly under GitHub Pages, where the
+// app is mounted at /connect/. In dev (BASE_URL = '/') this is just '/figma/...'.
+const logoSign = `${import.meta.env.BASE_URL}figma/logo-sign.svg`
+const logoWordmark = `${import.meta.env.BASE_URL}figma/logo-wordmark.svg`
 
 // Sidebar 07 — Figma node 2661:337586
 //

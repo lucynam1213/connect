@@ -426,8 +426,9 @@ function SubRow({
         <p className="truncate text-sm font-medium text-secondary">{date}</p>
       </SubTd>
 
-      {/* Trailing price columns — all empty in expanded sub-rows */}
-      <SubTd className="w-[132px]" hidden={hidden.has('wsPrice')} />
+      {/* Trailing price columns — all empty in expanded sub-rows.
+          WS Price is never togglable, so it's never dimmed in the expansion. */}
+      <SubTd className="w-[132px]" />
       <SubTd className="w-[132px]" hidden={hidden.has('salePrice')} />
       {specialPriceEnabled && (
         <SubTd className="w-[132px]" hidden={hidden.has('specialPrice')} />
