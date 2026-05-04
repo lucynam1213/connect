@@ -32,7 +32,13 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        # `npm ci` requires the lockfile to match the resolved tree exactly,
+        # which is sensitive to the npm minor version that produced the lockfile
+        # (Node 22 ships npm 10.9; Node 24 ships npm 11). When the dev/CI npm
+        # versions disagree on transitive optional deps (e.g. @emnapi/*),
+        # `npm ci` fails with EUSAGE. `npm install` is permissive enough to
+        # heal that drift while still respecting the lockfile.
+        run: npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
