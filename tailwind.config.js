@@ -1,0 +1,83 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--base-background)',
+        foreground: 'var(--base-foreground)',
+        card: 'var(--base-card)',
+        border: 'var(--base-border)',
+        'elements-border': 'var(--base-elements-border)',
+        input: 'var(--base-input)',
+        muted: {
+          DEFAULT: 'var(--base-muted)',
+          foreground: 'var(--base-muted-foreground)',
+        },
+        secondary: {
+          DEFAULT: 'var(--base-secondary)',
+          foreground: 'var(--base-secondary-foreground)',
+          button: 'var(--base-secondary-button)',
+        },
+        primary: {
+          DEFAULT: 'var(--base-primary)',
+          foreground: 'var(--base-primary-foreground)',
+        },
+        sidebar: {
+          DEFAULT: 'var(--base-sidebar-background)',
+          accent: 'var(--base-sidebar-accent)',
+          'accent-foreground': 'var(--base-sidebar-accent-foreground)',
+          primary: 'var(--base-sidebar-primary)',
+          'primary-foreground': 'var(--base-sidebar-primary-foreground)',
+        },
+        'badge-green': 'var(--base-badge-green)',
+        'badge-green-accent': 'var(--base-badge-green-accent)',
+        'badge-red': 'var(--base-badge-red)',
+        'badge-red-accent': 'var(--base-badge-red-accent)',
+        'badge-gray': 'var(--base-badge-gray)',
+        'badge-gray-accent': 'var(--base-badge-gray-accent)',
+        'badge-amber': 'var(--base-badge-amber)',
+        'badge-amber-accent': 'var(--base-badge-amber-accent)',
+        ring: 'var(--base-ring)',
+        destructive: 'var(--base-destructive)',
+      },
+      spacing: {
+        'px': '1px',
+        '0.5': '2px',
+        '1': '4px',
+        '2': '8px',
+        '2.5': '10px',
+        '3': '12px',
+        '4': '16px',
+        '5': '20px',
+        '6': '24px',
+        '8': '32px',
+        '12': '48px',
+      },
+      borderRadius: {
+        none: '0',
+        xs: '2px',
+        sm: '6px',
+        md: '8px',
+        lg: '10px',
+        '2xl': '16px',
+        full: '9999px',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        '2xs': ['10px', { lineHeight: '12px' }],
+        xs: ['12px', { lineHeight: '16px' }],
+        sm: ['14px', { lineHeight: '20px' }],
+        base: ['16px', { lineHeight: '24px' }],
+        '3xl': ['30px', { lineHeight: '36px' }],
+      },
+      boxShadow: {
+        xs: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        sm: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+      },
+    },
+  },
+  plugins: [],
+}

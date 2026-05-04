@@ -1,0 +1,82 @@
+@import url('https://rsms.me/inter/inter.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --base-background: #fdfcfa;
+  --base-foreground: #1f1f1f;
+  --base-card: #ffffff;
+  --base-border: #f2ede7;
+  --base-elements-border: #f2ede7;
+  --base-input: #ffffff;
+  --base-muted: #f2f2f2;
+  --base-muted-foreground: #a3a3a3;
+  --base-secondary: #6b6b6b;
+  --base-secondary-foreground: #ffffff;
+  --base-secondary-button: #1f1f1f;
+  --base-primary: #e11d74;
+  --base-primary-foreground: #ffffff;
+  --base-ring: #737373;
+  --base-destructive: #ef4444;
+
+  --base-sidebar-background: #fefefd;
+  --base-sidebar-accent: rgba(253, 242, 248, 0.6);
+  --base-sidebar-accent-foreground: #e11d74;
+  --base-sidebar-primary: #e11d74;
+  --base-sidebar-primary-foreground: #fafafa;
+
+  --base-badge-green: #ebf4f1;
+  --base-badge-green-accent: #4f8f7c;
+  --base-badge-red: #f6eef1;
+  --base-badge-red-accent: #9e4a5e;
+  --base-badge-gray: #f4f4f5;
+  --base-badge-gray-accent: #8a8a8a;
+  --base-badge-amber: #fdf5ec;
+  --base-badge-amber-accent: #a17a4a;
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    background-color: var(--base-background);
+    color: var(--base-foreground);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+}
+
+/*
+ * Always-visible horizontal scrollbar for the items table.
+ * On macOS WebKit, scrollbars are hidden by default and only appear on hover.
+ * This forces the scrollbar to be persistently shown so users can always see
+ * how much horizontal content is off-screen and scrub to it.
+ */
+.table-scroll {
+  overflow-x: scroll;
+  scrollbar-gutter: stable;
+}
+.table-scroll::-webkit-scrollbar {
+  height: 10px;
+  -webkit-appearance: none;
+}
+.table-scroll::-webkit-scrollbar-track {
+  background: var(--base-muted);
+  border-radius: 6px;
+}
+.table-scroll::-webkit-scrollbar-thumb {
+  background: var(--base-muted-foreground);
+  border-radius: 6px;
+  border: 2px solid var(--base-muted);
+}
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--base-secondary);
+}
