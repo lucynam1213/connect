@@ -25,23 +25,34 @@ const logoWordmark = `${import.meta.env.BASE_URL}figma/logo-wordmark.svg`
 //
 // Tailwind v3 supports arbitrary screens via min-[1601px]: so the threshold
 // matches the spec exactly without modifying tailwind.config.
+// Routes the sidebar can navigate to. Add new entries here as new pages
+// are introduced and they'll automatically participate in the active state +
+// click handling.
+export type SidebarRoute = 'dashboard' | 'item' | 'linesheet' | 'orders' | 'customers' | 'marketing' | 'payments'
+
 type NavItem = {
   label: string
+  route: SidebarRoute
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
-  active?: boolean
 }
 
 const navItems: NavItem[] = [
-  { label: 'Dashboard', icon: LayoutDashboard },
-  { label: 'Item', icon: Package },
-  { label: 'Linesheet', icon: Columns2, active: true },
-  { label: 'Orders', icon: ShoppingCart },
-  { label: 'Customers', icon: Users },
-  { label: 'Marketing', icon: MessageSquareMore },
-  { label: 'Payments', icon: WalletMinimal },
+  { label: 'Dashboard', route: 'dashboard', icon: LayoutDashboard },
+  { label: 'Item', route: 'item', icon: Package },
+  { label: 'Linesheet', route: 'linesheet', icon: Columns2 },
+  { label: 'Orders', route: 'orders', icon: ShoppingCart },
+  { label: 'Customers', route: 'customers', icon: Users },
+  { label: 'Marketing', route: 'marketing', icon: MessageSquareMore },
+  { label: 'Payments', route: 'payments', icon: WalletMinimal },
 ]
 
-export function Sidebar() {
+export function Sidebar({
+  currentRoute,
+  onNavigate,
+}: {
+  currentRoute: SidebarRoute
+  onNavigate: (route: SidebarRoute) => void
+}) {
   return (
     <aside
       className={cn(
@@ -63,40 +74,43 @@ export function Sidebar() {
       {/* Content — primary menu */}
       <div className="flex flex-1 flex-col gap-2 p-2">
         <ul className="flex flex-col gap-3">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <button
-                aria-label={item.label}
-                title={item.label}
-                className={cn(
-                  'flex h-8 w-full items-center gap-2 rounded-md p-2 text-left text-sm leading-none transition-colors',
-                  // Center the icon when collapsed; left-align with label when expanded.
-                  'justify-center min-[1601px]:justify-start',
-                  // Hover: sidebar-accent bg + primary fg/icon (currentColor).
-                  'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-                  item.active
-                    ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                    : 'text-foreground',
-                )}
-              >
-                {/*
-                  Stroke is set in TWO ways for redundancy:
-                    - strokeWidth={1.5} prop → SVG `stroke-width` attribute
-                    - `stroke-[1.5]` Tailwind class → CSS `stroke-width: 1.5`
-                  CSS wins over presentation attributes, so even if a Lucide
-                  release re-introduced a path-level override, the CSS value
-                  pins the stroke at 1.5.
-                */}
-                <item.icon
-                  className="h-4 w-4 shrink-0 stroke-[1.5]"
-                  strokeWidth={1.5}
-                />
-                <span className="hidden min-[1601px]:flex flex-1 truncate">
-                  {item.label}
-                </span>
-              </button>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = item.route === currentRoute
+            return (
+              <li key={item.route}>
+                <button
+                  type="button"
+                  aria-label={item.label}
+                  aria-current={isActive ? 'page' : undefined}
+                  title={item.label}
+                  onClick={() => onNavigate(item.route)}
+                  className={cn(
+                    'flex h-8 w-full items-center gap-2 rounded-md p-2 text-left text-sm leading-none transition-colors',
+                    // Center the icon when collapsed; left-align with label when expanded.
+                    'justify-center min-[1601px]:justify-start',
+                    // Hover: sidebar-accent bg + primary fg/icon (currentColor).
+                    'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                    isActive
+                      ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                      : 'text-foreground',
+                  )}
+                >
+                  {/*
+                    Stroke is set in TWO ways for redundancy:
+                      - strokeWidth={1.5} prop → SVG `stroke-width` attribute
+                      - `stroke-[1.5]` Tailwind class → CSS `stroke-width: 1.5`
+                  */}
+                  <item.icon
+                    className="h-4 w-4 shrink-0 stroke-[1.5]"
+                    strokeWidth={1.5}
+                  />
+                  <span className="hidden min-[1601px]:flex flex-1 truncate">
+                    {item.label}
+                  </span>
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </div>
 
